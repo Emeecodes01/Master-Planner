@@ -1,9 +1,12 @@
 package com.example.user.masterplanner.di;
 
+import android.app.AlarmManager;
 import android.app.Application;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+
 import com.example.user.masterplanner.BaseApplication;
 import com.example.user.masterplanner.DataBase.DatabaseInfo;
 import com.example.user.masterplanner.DataBase.DbInfoNumber;
@@ -57,4 +60,15 @@ public class AppModule{
         return context.getSharedPreferences("default", Context.MODE_PRIVATE);
     }
 
+    @Singleton
+    @Provides
+    AlarmManager getAlarmManager(@AnnoHelper.ApplicationContext Context context){
+        return (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    }
+
+    @Singleton
+    @Provides
+    RingtoneManager getRingToneManager(@AnnoHelper.ApplicationContext Context context){
+        return new RingtoneManager(context);
+    }
 }

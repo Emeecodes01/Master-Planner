@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.PopupMenu;
+import android.widget.RadioGroup;
 
 import com.example.user.masterplanner.Models.Remainder;
 import com.example.user.masterplanner.R;
@@ -55,8 +56,13 @@ public class AddRemainderActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onBackBtnClicked() {
+    public void onBackBtnClicked(){
         onBackPressed();
+    }
+
+    @Override
+    public void showRingtoneDialog() {
+
     }
 
     @Override
@@ -69,6 +75,7 @@ public class AddRemainderActivity extends AppCompatActivity implements
         timePickerDialog.setThemeDark(true);
         timePickerDialog.setVersion(TimePickerDialog.Version.VERSION_2);
         timePickerDialog.setTitle("Choose Time");
+        timePickerDialog.vibrate(true);
     }
 
     @Override
@@ -81,6 +88,7 @@ public class AddRemainderActivity extends AppCompatActivity implements
         datePickerDialog.setThemeDark(true);
         datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
         datePickerDialog.setTitle("Choose date");
+        datePickerDialog.vibrate(true);
     }
 
     @Override
@@ -108,29 +116,28 @@ public class AddRemainderActivity extends AppCompatActivity implements
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
         this.hours = hourOfDay;this.munites = minute;this.secs = second;
-        String timeString = hourOfDay + ":" + minute;
-//        String timeStr = getTimeStr(hourOfDay, minute;
-        presenter.setNewTimeTv(timeString);
+        String timeStr = getTimeStr(hourOfDay, minute);
+        presenter.setNewTimeTv(timeStr);
     }
 
-//    private String getTimeStr(int hourOfDay, int minute){
-//        String mHour = "", mMinutes = "";String
-//
-//        if (hourOfDay > 12){
-//            amOrPm = "PM";
-//            hour = hour - 12;
-//        }
-//
-//        if (hour < 10){
-//            mHour = "0"+hour;
-//            if (mins < 10){
-//                mMinutes = "0"+mins;
-//            }else {
-//                mMinutes = ""+mins;
-//            }
-//        }
-//        String time = mHour+ ":" +mMinutes + amOrPm;
-//    }
+    private String getTimeStr(int hourOfDay, int minute){
+        String mHour = "", mMinutes = "";String amOrPm = "AM";
+
+        if (hourOfDay > 12){
+            amOrPm = "PM";
+            hourOfDay = hourOfDay - 12;
+        }
+
+        if (hourOfDay < 10){
+            mHour = "0"+hourOfDay;
+            if (minute < 10){
+                mMinutes = "0"+minute;
+            }else {
+                mMinutes = ""+minute;
+            }
+        }
+        return mHour+ ":" +mMinutes + amOrPm;
+    }
 
     @Override
     public void onPriorityChecked(String priority) {

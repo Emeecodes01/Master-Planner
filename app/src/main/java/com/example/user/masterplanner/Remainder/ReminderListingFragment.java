@@ -8,23 +8,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.example.user.masterplanner.BaseApplication;
 import com.example.user.masterplanner.Models.Remainder;
 import com.example.user.masterplanner.R;
 import com.example.user.masterplanner.Remainder.RemainderDialog.LoadingDialog;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -40,7 +33,6 @@ public class ReminderListingFragment extends Fragment implements RemainderListin
 
     @Inject
     Presenter presenter;
-
 
     @BindView(R.id.addFab)
     private FloatingActionButton addFab;
@@ -110,7 +102,6 @@ public class ReminderListingFragment extends Fragment implements RemainderListin
         }
 
     }
-
 
     @Override
     public void displayLoadingView() {

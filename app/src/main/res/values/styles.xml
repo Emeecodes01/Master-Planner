@@ -20,4 +20,13 @@
         <item name="background">@color/context_mode_color</item>
         <item name="android:title">Select</item>
     </style>
+
+    <style name="CustomDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/CustomDialogAnim</item>
+    </style>
+
+    <style name="CustomDialogAnim">
+        <item name="android:windowEnterAnimation">@anim/translate_left_side</item>
+        <item name="android:windowExitAnimation">@anim/translate_right_side</item>
+    </style>
 </resources>

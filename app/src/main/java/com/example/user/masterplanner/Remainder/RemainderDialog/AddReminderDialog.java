@@ -1,7 +1,6 @@
 package com.example.user.masterplanner.Remainder.RemainderDialog;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -20,21 +19,23 @@ import butterknife.Unbinder;
  * Created by emmanuel on 2018-04-22.
  */
 
-
 public class AddReminderDialog extends DialogFragment implements View.OnClickListener{
     @BindView(R.id.dialog_message)
     TextView dialogMessage;
     @BindView(R.id.okBtn)
     Button okBtn;
 
+    public static final int DIALOG_TYPE_ONE = 1;
+    public static final int DIALOG_TYPE_TWO = 2;
+
 
     private Unbinder unbinder;
     private AddRemainderCallBack addRemainderCallBack;
 
-    public static AddReminderDialog newInstance(String message) {
-
+    public static AddReminderDialog newInstance(int type,String message) {
         Bundle args = new Bundle();
         args.putString("message", message);
+        args.putInt("dialogType", type);
         AddReminderDialog fragment = new AddReminderDialog();
         fragment.setArguments(args);
         return fragment;
@@ -48,21 +49,32 @@ public class AddReminderDialog extends DialogFragment implements View.OnClickLis
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        View dialogView = layoutInflater.inflate(R.layout.dialog_message_layout, null);
+        int layoutRes = 0;
+        int dialogType = getArguments().getInt("dialogType");
+        if (dialogType == DIALOG_TYPE_ONE){
+            layoutRes = R.layout.add_remainder_dialog_layout;
+        }else if (dialogType == DIALOG_TYPE_TWO){
+            layoutRes = R.layout.add_remainder_err_dialog_layout;
+        }
+        View dialogView = layoutInflater.inflate(layoutRes, null);
         unbinder = ButterKnife.bind(this, dialogView);
 
+        setUpViews(dialogView);
+        return createDialog(dialogView);
+    }
+
+    private void setUpViews(View dialogView){
         okBtn = ButterKnife.findById(dialogView, R.id.okBtn);
         dialogMessage = ButterKnife.findById(dialogView, R.id.dialog_message);
         dialogMessage.setText(getArguments().getString("message"));
-
         okBtn.setOnClickListener(this);
+    }
 
-        Dialog dialog = new Dialog(getContext());
-        dialog.setTitle(getArguments().getString("message"));
+    private Dialog createDialog(View dialogView){
+        Dialog dialog = new Dialog(getContext(), R.style.CustomDialog);
         dialog.setContentView(dialogView);
         return dialog;
     }
-
 
     @Override
     public void onDestroyView() {

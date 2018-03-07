@@ -27,7 +27,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         app:srcCompat="@drawable/ic_alarm_on_white_48dp" />
 
     <Button

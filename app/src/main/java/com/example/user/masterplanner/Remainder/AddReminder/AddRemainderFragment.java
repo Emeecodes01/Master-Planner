@@ -124,6 +124,9 @@ public class AddRemainderFragment extends Fragment implements
             case R.id.priority_layout:
                 listener.selectPriority();
                 break;
+            case R.id.ringtone_layout:
+                listener.showRingtoneDialog();
+                break;
         }
     }
 
@@ -156,7 +159,8 @@ public class AddRemainderFragment extends Fragment implements
 
     @Override
     public void showAddReminderDialog() {
-        AddReminderDialog addReminderDialog = AddReminderDialog.newInstance("Remainder Added Successfully");
+        AddReminderDialog addReminderDialog = AddReminderDialog.newInstance(AddReminderDialog.DIALOG_TYPE_ONE,
+                "Remainder Added Successfully");
         addReminderDialog.setListener(this);
         addReminderDialog.show(getFragmentManager(), "AddReminderDialog");
     }
@@ -178,6 +182,7 @@ public class AddRemainderFragment extends Fragment implements
         void setPresenter(Presenter presenter);
         void selectPriority();
         void onBackBtnClicked();
+        void showRingtoneDialog();
     }
 
     @Override
@@ -192,5 +197,4 @@ public class AddRemainderFragment extends Fragment implements
         super.onDestroy();
         ((BaseApplication)getActivity().getApplication()).realeaseAddRemainderComponent();
     }
-
 }

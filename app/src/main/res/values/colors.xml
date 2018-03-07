@@ -14,4 +14,5 @@
     <color name="Yellow">#7ad7c60c</color>
     <color name="Red">#7acf0707</color>
     <color name="context_mode_color">#739694</color>
+    <color name="color_accent_transparent">#3c9dfce7</color>
 </resources>

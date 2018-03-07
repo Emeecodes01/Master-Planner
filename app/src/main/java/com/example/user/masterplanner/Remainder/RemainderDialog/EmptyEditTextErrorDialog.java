@@ -3,7 +3,6 @@ package com.example.user.masterplanner.Remainder.RemainderDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +41,7 @@ public class EmptyEditTextErrorDialog extends DialogFragment implements View.OnC
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        View dialogView = layoutInflater.inflate(R.layout.dialog_message_layout, null);
+        View dialogView = layoutInflater.inflate(R.layout.add_remainder_dialog_layout, null);
 
         unbinder = ButterKnife.bind(this, dialogView);
         okBtn = ButterKnife.findById(dialogView, R.id.okBtn);
