@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <gradient android:startColor="@color/nav_start_color"
-        android:centerColor="@color/nav_mid_color"
-        android:endColor="@color/nav_end_color"
+    <gradient android:startColor="@color/colorPrimaryDark2"
+        android:centerColor="@color/colorPrimary2"
+        android:endColor="@color/colorPrimary2"
         android:gradientRadius="200dp"
         android:type="radial">
 

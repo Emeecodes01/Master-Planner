@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="76dp"
+    app:cardElevation="5dp"
+    android:layout_margin="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="1dp">
+
+
+        <FrameLayout
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/priority_img_view_fram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/priority_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/priority_low"/>
+            <TextView
+                android:id="@+id/priority_tv"
+                android:text="A"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/reminder_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/priority_img_view_fram"
+            android:layout_marginLeft="29dp"
+            android:layout_marginStart="29dp"
+            android:layout_toEndOf="@+id/priority_img_view_fram"
+            android:layout_toRightOf="@+id/priority_img_view_fram"
+            android:text="Go to Class"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <TextView
+            android:id="@+id/reminder_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/reminder_title"
+            android:layout_alignStart="@+id/reminder_title"
+            android:layout_below="@+id/reminder_title"
+            android:layout_marginLeft="11dp"
+            android:layout_marginStart="11dp"
+            android:text="04:50am" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
