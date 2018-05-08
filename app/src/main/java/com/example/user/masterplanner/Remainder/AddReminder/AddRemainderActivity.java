@@ -4,9 +4,11 @@ package com.example.user.masterplanner.Remainder.AddReminder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.PopupMenu;
 
 import com.example.user.masterplanner.Models.Remainder;
 import com.example.user.masterplanner.R;
+import com.example.user.masterplanner.Remainder.RemainderDialog.PriorityDialog;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -20,10 +22,11 @@ import butterknife.ButterKnife;
 public class AddRemainderActivity extends AppCompatActivity implements
         AddRemainderFragment.AddRemainderFragmentListener,
         TimePickerDialog.OnTimeSetListener,
-        DatePickerDialog.OnDateSetListener{
+        DatePickerDialog.OnDateSetListener,
+        PriorityDialog.OnPriorityDialogListener{
 
     private int day, month, year, hours, secs, munites;
-    private String priority;
+    private String priorityStr;
 
     private Presenter presenter;
 
@@ -45,6 +48,13 @@ public class AddRemainderActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void selectPriority(){
+        PriorityDialog priorityDialog = new PriorityDialog();
+        priorityDialog.show(getSupportFragmentManager(), "PriorityDialog");
+
+    }
+
+    @Override
     public void showTimeDialog(){
         Calendar calendarNow = Calendar.getInstance();
         TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(this,
@@ -52,6 +62,7 @@ public class AddRemainderActivity extends AppCompatActivity implements
                 calendarNow.get(Calendar.SECOND), false);
         timePickerDialog.show(getFragmentManager(), "timePickerDialog");
         timePickerDialog.setThemeDark(true);
+        timePickerDialog.setVersion(TimePickerDialog.Version.VERSION_2);
     }
 
     @Override
@@ -62,6 +73,7 @@ public class AddRemainderActivity extends AppCompatActivity implements
                 calendarNow.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show(getFragmentManager(),"DatePickerDialog");
         datePickerDialog.setThemeDark(true);
+        datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
     }
 
     @Override
@@ -69,10 +81,13 @@ public class AddRemainderActivity extends AppCompatActivity implements
         Remainder remainder = new Remainder();
         remainder.setReminderTitle(remainderTitle);
         remainder.setHour(hours);
-        remainder.setMinutes(munites);remainder.setYear(year);remainder.setPriority("Priority");
+        remainder.setMinutes(munites);remainder.setYear(year);remainder.setPriority(priorityStr);
         remainder.setSeconds(secs);remainder.setDay(day);remainder.setMonth(month);
 
-        presenter.addReminder(remainder);
+        long id = presenter.addReminder(remainder);
+        if (id > 0){
+            presenter.createAddRemainderDialog();
+        }
     }
 
 
@@ -86,7 +101,13 @@ public class AddRemainderActivity extends AppCompatActivity implements
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
         this.hours = hourOfDay;this.munites = minute;this.secs = second;
-        String timeString = minute + ":" + hourOfDay;
+        String timeString = hourOfDay + ":" + minute;
         presenter.setNewTimeTv(timeString);
+    }
+
+    @Override
+    public void onPriorityChecked(String priority) {
+        this.priorityStr = priority;
+        presenter.setNewPriority(priority);
     }
 }

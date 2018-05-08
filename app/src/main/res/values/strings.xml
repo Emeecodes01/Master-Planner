@@ -4,4 +4,8 @@
     <string name="open_drawer">Open Drawer</string>
     <string name="close_drawer">Close Drawer</string>
     <string name="enter_your_reminder">Enter your reminder</string>
+    <string name="how_important_is_this_to_you">How important is this to you</string>
+    <string name="medium_">Medium</string>
+    <string name="high">High</string>
+    <string name="low">Low</string>
 </resources>

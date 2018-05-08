@@ -65,13 +65,7 @@ public class MasterPlannerDb extends SQLiteOpenHelper{
         contentValues.put(RemainderDbContract.YEAR, year);
         contentValues.put(RemainderDbContract.PRIORITY, priority);
 
-        long id = sqLiteDatabase.insert(RemainderDbContract.DB_NAME, null, contentValues);
-        if (id > 0){
-            Toast.makeText(context, "Reminder Set Successfully", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(context, "Reminder not set", Toast.LENGTH_SHORT).show();
-        }
-        return id;
+        return sqLiteDatabase.insert(RemainderDbContract.DB_NAME, null, contentValues);
     }
 
     private class RemainderDbContract implements BaseColumns{

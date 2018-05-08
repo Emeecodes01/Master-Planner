@@ -10,6 +10,8 @@ public interface Presenter{
     void setView(AddReminderView view);
     void setNewTimeTv(String time);
     void setNewDateTv(String date);
+    void setNewPriority(String priority);
     void destory();
-    void addReminder(Remainder remainder);
+    void createAddRemainderDialog();
+    long addReminder(Remainder remainder);
 }

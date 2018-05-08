@@ -8,4 +8,6 @@ public interface AddReminderView{
     void showTime(String time);
     void showDate(String date);
     void showErrorDialog(int type);
+    void showAddReminderDialog();
+    void showPriority(String priority);
 }

@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.example.user.masterplanner.BaseApplication;
 import com.example.user.masterplanner.R;
+import com.example.user.masterplanner.Remainder.RemainderDialog.AddReminderDialog;
+import com.example.user.masterplanner.Remainder.RemainderDialog.EmptyEditTextErrorDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import javax.inject.Inject;
@@ -118,6 +120,9 @@ public class AddRemainderFragment extends Fragment implements
             case R.id.date_layout:
                 listener.showDateDialog();
                 break;
+            case R.id.priority_layout:
+                listener.selectPriority();
+                break;
         }
     }
 
@@ -127,12 +132,12 @@ public class AddRemainderFragment extends Fragment implements
             //todo: show a dialog to set the title of the edit text
             showErrorDialog(1);
         }else {
-            listener.addRemainder(reminderEd);
+           listener.addRemainder(reminderEd);
         }
     }
 
     @Override
-    public void showTime(String time) {
+    public void showTime(String time){
         remainderTimeTv.setText(time);
     }
 
@@ -144,7 +149,19 @@ public class AddRemainderFragment extends Fragment implements
 
     @Override
     public void showErrorDialog(int type){
+        EmptyEditTextErrorDialog emptyEditTextErrorDialog = EmptyEditTextErrorDialog.newInstance("Enter the reminder title");
+        emptyEditTextErrorDialog.show(getFragmentManager(), "emptyEditText");
+    }
 
+    @Override
+    public void showAddReminderDialog() {
+        AddReminderDialog addReminderDialog = AddReminderDialog.newInstance("Remainder Added Successfully");
+        addReminderDialog.show(getFragmentManager(), "AddReminderDialog");
+    }
+
+    @Override
+    public void showPriority(String priority) {
+        priorityTv.setText(priority);
     }
 
     public interface AddRemainderFragmentListener{
@@ -152,6 +169,7 @@ public class AddRemainderFragment extends Fragment implements
         void showDateDialog();
         void addRemainder(String remainderTitle);
         void setPresenter(Presenter presenter);
+        void selectPriority();
     }
 
     @Override

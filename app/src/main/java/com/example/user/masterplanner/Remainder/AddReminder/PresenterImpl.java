@@ -37,8 +37,15 @@ public class PresenterImpl implements Presenter{
     }
 
     @Override
-    public void addReminder(Remainder remainder){
-        dataManager.putReminderIntoDb(remainder);
+    public void setNewPriority(String priority) {
+        if (checkView()){
+            view.showPriority(priority);
+        }
+    }
+
+    @Override
+    public long addReminder(Remainder remainder){
+        return dataManager.putReminderIntoDb(remainder);
     }
 
     private boolean checkView(){
@@ -47,5 +54,13 @@ public class PresenterImpl implements Presenter{
 
     public void destory(){
         view = null;
+    }
+
+    @Override
+    public void createAddRemainderDialog(){
+        if (checkView()){
+            view.showAddReminderDialog();
+        }
+
     }
 }
