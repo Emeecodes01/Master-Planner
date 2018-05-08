@@ -14,8 +14,6 @@ import com.example.user.masterplanner.R;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -23,14 +21,11 @@ import butterknife.ButterKnife;
  * Created by emmanuel on 2018-04-20.
  */
 
-public class ReminderFragment extends Fragment implements RemainderView, View.OnClickListener{
+public class ReminderListingFragment extends Fragment implements RemainderListingView, View.OnClickListener{
     private OnRemainderFragmentAttach fragmentAttach;
 
     @BindView(R.id.addFab)
     private FloatingActionButton addFab;
-
-    @Inject
-    Presenter presenter;
 
     @Override
     public void onAttach(Context context) {
@@ -40,13 +35,12 @@ public class ReminderFragment extends Fragment implements RemainderView, View.On
         }catch (ClassCastException e){
             throw new ClassCastException("Can't cast this shitty class: piss off man");
         }
-
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_reminder_content, container, false);
+        View view = inflater.inflate(R.layout.remainder_listing_fragment_layout, container, false);
         ButterKnife.bind(this, view);
         return view;
     }

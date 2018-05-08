@@ -1,8 +1,9 @@
 package com.example.user.masterplanner.Manager;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
-import com.example.user.masterplanner.DataBase.MaseterPlannerDb;
+import com.example.user.masterplanner.DataBase.MasterPlannerDb;
 import com.example.user.masterplanner.Models.Remainder;
 import com.example.user.masterplanner.Utils.AnnoHelper;
 import com.example.user.masterplanner.Utils.SharedPrefHelper;
@@ -19,15 +20,15 @@ import io.reactivex.Observable;
 
 public class DataManagerImpl implements DataManager{
     private Context context;
-    private MaseterPlannerDb maseterPlannerDb;
-    private SharedPrefHelper sharedPrefHelper;
+    private MasterPlannerDb masterPlannerDb;
+    private SharedPreferences sharedPreferences;
 
 
     @Inject
-    public DataManagerImpl(@AnnoHelper.ApplicationContext Context context, MaseterPlannerDb maseterPlannerDb, SharedPrefHelper sharedPrefHelper) {
+    public DataManagerImpl(@AnnoHelper.ApplicationContext Context context, MasterPlannerDb masterPlannerDb, SharedPreferences sharedPreferences) {
         this.context = context;
-        this.maseterPlannerDb = maseterPlannerDb;
-        this.sharedPrefHelper = sharedPrefHelper;
+        this.masterPlannerDb = masterPlannerDb;
+        this.sharedPreferences = sharedPreferences;
     }
 
     @Override
@@ -36,37 +37,7 @@ public class DataManagerImpl implements DataManager{
     }
 
     @Override
-    public void putStringValIntoPref(String key, String value) {
-        sharedPrefHelper.putStringValInPref(key, value);
-    }
-
-    @Override
-    public void putIntValIntoPref(String key, int value) {
-        sharedPrefHelper.putIntValInPref(key, value);
-    }
-
-    @Override
-    public void putBoolValIntoPref(String key, boolean value) {
-        sharedPrefHelper.putBoolValInPref(key, value);
-    }
-
-    @Override
-    public String getStringValFromPref(String key) {
-        return null;
-    }
-
-    @Override
-    public int getIntValueFromPref(String key) {
-        return 0;
-    }
-
-    @Override
-    public boolean getBoolValueFromPref(String key) {
-        return false;
-    }
-
-    @Override
-    public void putReminderIntoDb(Remainder remainder) {
-
+    public long putReminderIntoDb(Remainder remainder){
+        return masterPlannerDb.putRemainderInDb(remainder);
     }
 }

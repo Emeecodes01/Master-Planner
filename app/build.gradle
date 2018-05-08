@@ -26,6 +26,7 @@ ext {
     daggerVersion = '2.8'
     butterKnifeVersion = '8.8.1'
     supportLibVersion = '26.1.0'
+    timePickerVersion = '3.5.0'
 }
 
 dependencies {
@@ -43,6 +44,11 @@ dependencies {
     implementation "com.google.dagger:dagger:${daggerVersion}"
     provided 'javax.annotation:jsr250-api:1.0'
     implementation 'javax.inject:javax.inject:1'
+
+//    //time picker dialog
+    compile ('com.wdullaer:materialdatetimepicker:3.5.0'){
+        exclude group:'com.android.support'
+    }
 
 
     testImplementation 'junit:junit:4.12'

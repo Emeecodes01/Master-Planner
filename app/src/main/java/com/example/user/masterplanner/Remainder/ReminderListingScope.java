@@ -7,5 +7,5 @@ import javax.inject.Scope;
  */
 
 @Scope
-public @interface ReminderScope{
+public @interface ReminderListingScope {
 }

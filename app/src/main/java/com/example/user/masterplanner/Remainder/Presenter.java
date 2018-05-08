@@ -7,6 +7,5 @@ import com.example.user.masterplanner.Models.Remainder;
  */
 
 public interface Presenter{
-    void setView(RemainderView view);
-    void addReminderButtonClick(Remainder remainder);
+    void setView(RemainderListingView view);
 }

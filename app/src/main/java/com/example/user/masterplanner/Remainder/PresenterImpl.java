@@ -15,27 +15,19 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class PresenterImpl implements Presenter{
-    private RemainderView view;
-    private RemainderInteractor remainderInteractor;
+    private RemainderListingView view;
+    private RemainderListingInteractor remainderInteractor;
     private Disposable disposableReminder;
 
-    public PresenterImpl(RemainderInteractor remainderInteractor){
+    public PresenterImpl(RemainderListingInteractor remainderInteractor){
         this.remainderInteractor = remainderInteractor;
     }
 
-
     @Override
-    public void setView(RemainderView view){
+    public void setView(RemainderListingView view){
         //todo: start the loading view
         this.view = view;
         displayReminders();
-    }
-
-
-
-    @Override
-    public void addReminderButtonClick(Remainder remainder){
-        remainderInteractor.putReminderIntoDb(remainder);
     }
 
 
@@ -60,8 +52,6 @@ public class PresenterImpl implements Presenter{
     private void onRemainderFetchFailed(Throwable throwable) {
 
     }
-
-
 
     private boolean checkView(){
         return view != null;

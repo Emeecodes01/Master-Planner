@@ -13,22 +13,16 @@ import io.reactivex.Observable;
  * Created by emmanuel on 2018-04-20.
  */
 
-public class RemainderInteractorImpl implements RemainderInteractor{
+public class RemainderListingInteractorImpl implements RemainderListingInteractor{
     private DataManagerImpl dataManagerImpl;
 
     @Inject
-    public RemainderInteractorImpl(DataManagerImpl dataManagerImpl){
+    public RemainderListingInteractorImpl(DataManagerImpl dataManagerImpl){
         this.dataManagerImpl = dataManagerImpl;
     }
 
     @Override
     public Observable<List<Remainder>> fetchReminders(){
-
         return null;
-    }
-
-    @Override
-    public void putReminderIntoDb(Remainder remainder) {
-        dataManagerImpl.putReminderIntoDb(remainder);
     }
 }

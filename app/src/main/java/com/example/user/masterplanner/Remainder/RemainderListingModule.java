@@ -10,15 +10,15 @@ import dagger.Provides;
  */
 
 @Module
-public class RemainderModule{
+public class RemainderListingModule {
 
     @Provides
-    RemainderInteractor getReminderInteractor(DataManagerImpl dataManager){
-        return new RemainderInteractorImpl(dataManager);
+    RemainderListingInteractor getReminderInteractor(DataManagerImpl dataManager){
+        return new RemainderListingInteractorImpl(dataManager);
     }
 
     @Provides
-    Presenter getPresenter(RemainderInteractor remainderInteractor){
+    Presenter getPresenter(RemainderListingInteractor remainderInteractor){
         return new PresenterImpl(remainderInteractor);
     }
 }

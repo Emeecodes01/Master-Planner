@@ -8,6 +8,6 @@ import java.util.List;
  * Created by user on 2018-04-20.
  */
 
-public interface RemainderView{
+public interface RemainderListingView {
     void displayReminders(List<Remainder> remainderList);
 }

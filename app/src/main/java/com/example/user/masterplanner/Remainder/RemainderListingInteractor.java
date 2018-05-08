@@ -9,7 +9,6 @@ import io.reactivex.Observable;
  * Created by emmanuel on 2018-04-20.
  */
 
-public interface RemainderInteractor{
+public interface RemainderListingInteractor {
     Observable<List<Remainder>> fetchReminders();
-    void putReminderIntoDb(Remainder remainder);
 }

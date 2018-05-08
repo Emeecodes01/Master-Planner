@@ -10,12 +10,12 @@ import io.reactivex.disposables.Disposable;
 
 public class RxUtils{
 
-    public void unSubscribe(Disposable subscription){
+    public static void unSubscribe(Disposable subscription){
         if (subscription != null && !subscription.isDisposed()){
             subscription.dispose();
         }
     }
-    public void unSubscribeList(Disposable ... disposables){
+    public static void unSubscribeList(Disposable ... disposables){
         for(Disposable disposable : disposables){
             unSubscribe(disposable);
         }

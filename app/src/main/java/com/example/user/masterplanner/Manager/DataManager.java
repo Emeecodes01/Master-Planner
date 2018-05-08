@@ -12,12 +12,6 @@ import io.reactivex.Observable;
 
 public interface DataManager{
     Observable<List<Remainder>> fetchRemindersFromDb();
-    void putStringValIntoPref(String key, String value);
-    void putIntValIntoPref(String key, int value);
-    void putBoolValIntoPref(String key, boolean value);
-    String getStringValFromPref(String key);
-    int getIntValueFromPref(String key);
-    boolean getBoolValueFromPref(String key);
-    void putReminderIntoDb(Remainder remainder);
+    long putReminderIntoDb(Remainder remainder);
 
 }
