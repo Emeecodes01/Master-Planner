@@ -37,6 +37,6 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:layout_margin="5dp"
-        android:text="Ok"/>
+        android:text="Okay"/>
 
 </RelativeLayout>

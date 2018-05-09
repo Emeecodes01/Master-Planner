@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.example.user.masterplanner.Models.Remainder;
 import com.example.user.masterplanner.R;
 import com.example.user.masterplanner.Remainder.RemainderDialog.LoadingDialog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -43,6 +45,9 @@ public class ReminderListingFragment extends Fragment implements RemainderListin
 
     private Unbinder unbinder;
     private LoadingDialog loadingDialog;
+
+    private List<Remainder> remainderList = new ArrayList<>(20);
+    private RemainderAdapter remainderAdapter;
 
     @Override
     public void onAttach(Context context) {
@@ -75,29 +80,39 @@ public class ReminderListingFragment extends Fragment implements RemainderListin
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.setView(this);
+        initLayout();
         addFab.setOnClickListener(this);
+    }
+
+    private void initLayout(){
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        remainderAdapter = new RemainderAdapter(getContext(), this.remainderList);
+        recyclerView.setAdapter(remainderAdapter);
     }
 
 
     @Override
     public void displayReminders(List<Remainder> remainderList){
+        Log.i("called1", "Called1");
         if (remainderList != null){
             if (!remainderList.isEmpty()){
-                removeLoadingView();
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setAdapter(new RemainderAdapter(getContext(), remainderList));
-            }else{
-                //todo:display the empty fragment layout
+                this.remainderList.clear();
+                this.remainderList.addAll(remainderList);
+                remainderAdapter.notifyDataSetChanged();
+            }else {
+                //todo: show the empty layout
             }
-            }
+
         }
+
+    }
 
 
     @Override
     public void displayLoadingView() {
-//        loadingDialog = new LoadingDialog();
-//        loadingDialog.show(getFragmentManager(), "loadingView");
+        loadingDialog = new LoadingDialog();
+        loadingDialog.show(getFragmentManager(), "loadingView");
     }
 
     private void removeLoadingView(){
@@ -111,6 +126,20 @@ public class ReminderListingFragment extends Fragment implements RemainderListin
                 fragmentAttach.onAddReminderClicked();
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("onResume", "OnResume");
+        presenter.setView(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i("onPause", "onPause");
+        presenter.destroyView();
     }
 
     @Override

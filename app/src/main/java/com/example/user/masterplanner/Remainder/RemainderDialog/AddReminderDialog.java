@@ -1,6 +1,7 @@
 package com.example.user.masterplanner.Remainder.RemainderDialog;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -28,6 +29,7 @@ public class AddReminderDialog extends DialogFragment implements View.OnClickLis
 
 
     private Unbinder unbinder;
+    private AddRemainderCallBack addRemainderCallBack;
 
     public static AddReminderDialog newInstance(String message) {
 
@@ -36,6 +38,10 @@ public class AddReminderDialog extends DialogFragment implements View.OnClickLis
         AddReminderDialog fragment = new AddReminderDialog();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public void setListener(AddRemainderCallBack callBack){
+        this.addRemainderCallBack = callBack;
     }
 
     @NonNull
@@ -67,8 +73,12 @@ public class AddReminderDialog extends DialogFragment implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.okBtn){
-            //todo: open up another fragment
             dismiss();
+            addRemainderCallBack.onOkBtnClicked();
         }
+    }
+
+    public interface AddRemainderCallBack{
+        void onOkBtnClicked();
     }
 }

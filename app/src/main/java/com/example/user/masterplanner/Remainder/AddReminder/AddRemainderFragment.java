@@ -2,6 +2,7 @@ package com.example.user.masterplanner.Remainder.AddReminder;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -35,7 +36,7 @@ import butterknife.Unbinder;
 
 public class AddRemainderFragment extends Fragment implements
         View.OnClickListener,
-        AddReminderView{
+        AddReminderView, AddReminderDialog.AddRemainderCallBack{
 
     @Inject
     Presenter presenter;
@@ -141,7 +142,7 @@ public class AddRemainderFragment extends Fragment implements
         remainderTimeTv.setText(time);
     }
 
-    //todo: set up the priority pop up, create added reminder successfully/failure dialog
+
     @Override
     public void showDate(String date) {
         remainderDateTv.setText(date);
@@ -156,6 +157,7 @@ public class AddRemainderFragment extends Fragment implements
     @Override
     public void showAddReminderDialog() {
         AddReminderDialog addReminderDialog = AddReminderDialog.newInstance("Remainder Added Successfully");
+        addReminderDialog.setListener(this);
         addReminderDialog.show(getFragmentManager(), "AddReminderDialog");
     }
 
@@ -164,12 +166,18 @@ public class AddRemainderFragment extends Fragment implements
         priorityTv.setText(priority);
     }
 
+    @Override
+    public void onOkBtnClicked() {
+        listener.onBackBtnClicked();
+    }
+
     public interface AddRemainderFragmentListener{
         void showTimeDialog();
         void showDateDialog();
         void addRemainder(String remainderTitle);
         void setPresenter(Presenter presenter);
         void selectPriority();
+        void onBackBtnClicked();
     }
 
     @Override
@@ -184,4 +192,5 @@ public class AddRemainderFragment extends Fragment implements
         super.onDestroy();
         ((BaseApplication)getActivity().getApplication()).realeaseAddRemainderComponent();
     }
+
 }

@@ -62,7 +62,14 @@ public class PresenterImpl implements Presenter{
         RxUtils.unSubscribe(disposableReminder);
     }
 
+    @Override
+    public void destroyView() {
+        view = null;
+    }
+
     private boolean checkView(){
         return view != null;
     }
+
+
 }

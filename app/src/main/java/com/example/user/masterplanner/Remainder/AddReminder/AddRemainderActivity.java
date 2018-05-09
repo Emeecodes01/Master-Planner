@@ -55,6 +55,11 @@ public class AddRemainderActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onBackBtnClicked() {
+        onBackPressed();
+    }
+
+    @Override
     public void showTimeDialog(){
         Calendar calendarNow = Calendar.getInstance();
         TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(this,
@@ -63,6 +68,7 @@ public class AddRemainderActivity extends AppCompatActivity implements
         timePickerDialog.show(getFragmentManager(), "timePickerDialog");
         timePickerDialog.setThemeDark(true);
         timePickerDialog.setVersion(TimePickerDialog.Version.VERSION_2);
+        timePickerDialog.setTitle("Choose Time");
     }
 
     @Override
@@ -74,6 +80,7 @@ public class AddRemainderActivity extends AppCompatActivity implements
         datePickerDialog.show(getFragmentManager(),"DatePickerDialog");
         datePickerDialog.setThemeDark(true);
         datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
+        datePickerDialog.setTitle("Choose date");
     }
 
     @Override
@@ -109,5 +116,10 @@ public class AddRemainderActivity extends AppCompatActivity implements
     public void onPriorityChecked(String priority) {
         this.priorityStr = priority;
         presenter.setNewPriority(priority);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

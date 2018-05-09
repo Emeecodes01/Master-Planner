@@ -9,4 +9,5 @@ import com.example.user.masterplanner.Models.Remainder;
 public interface Presenter{
     void setView(RemainderListingView view);
     void destory();
+    void destroyView();
 }
