@@ -13,5 +13,4 @@ import io.reactivex.Observable;
 public interface DataManager{
     Observable<List<Remainder>> fetchRemindersFromDb();
     long putReminderIntoDb(Remainder remainder);
-
 }

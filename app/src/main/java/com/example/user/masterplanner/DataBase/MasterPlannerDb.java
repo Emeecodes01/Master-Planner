@@ -2,6 +2,7 @@ package com.example.user.masterplanner.DataBase;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
@@ -10,7 +11,15 @@ import android.widget.Toast;
 import com.example.user.masterplanner.Models.Remainder;
 import com.example.user.masterplanner.Utils.AnnoHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
+
+import static io.reactivex.Observable.fromArray;
 
 /**
  * Created by emmanuel on 2018-04-22.
@@ -65,7 +74,43 @@ public class MasterPlannerDb extends SQLiteOpenHelper{
         contentValues.put(RemainderDbContract.YEAR, year);
         contentValues.put(RemainderDbContract.PRIORITY, priority);
 
+
         return sqLiteDatabase.insert(RemainderDbContract.DB_NAME, null, contentValues);
+    }
+
+    public Observable<List<Remainder>> getAllRemaindersInDb(){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Cursor remaindersCursor = sqLiteDatabase.query(RemainderDbContract.DB_NAME,
+                null, null, null, null, null, RemainderDbContract._ID);
+
+        return getRemainders(remaindersCursor);
+    }
+
+    private Observable<List<Remainder>> getRemainders(Cursor remaindersCursor){
+        List<Remainder> remainderList  = new ArrayList<>();
+        if (remaindersCursor != null){
+
+            while (remaindersCursor.moveToNext()){
+
+                String remainderTitle = remaindersCursor.getString(remaindersCursor.getColumnIndex(RemainderDbContract.REMINDER_TITLE));
+                String priority = remaindersCursor.getString(remaindersCursor.getColumnIndex(RemainderDbContract.PRIORITY));
+                int hour = remaindersCursor.getInt(remaindersCursor.getColumnIndex(RemainderDbContract.HOUR));
+                int mins = remaindersCursor.getInt(remaindersCursor.getColumnIndex(RemainderDbContract.MINUTE));
+                int secs = remaindersCursor.getInt(remaindersCursor.getColumnIndex(RemainderDbContract.SECONDS));
+                int year = remaindersCursor.getInt(remaindersCursor.getColumnIndex(RemainderDbContract.YEAR));
+                int month = remaindersCursor.getInt(remaindersCursor.getColumnIndex(RemainderDbContract.MONTH));
+                int day = remaindersCursor.getInt(remaindersCursor.getColumnIndex(RemainderDbContract.DAY));
+
+                Remainder remainder = new Remainder();
+                remainder.setPriority(priority);remainder.setReminderTitle(remainderTitle);remainder.setHour(hour);
+                remainder.setMinutes(mins);remainder.setSeconds(secs);remainder.setYear(year);remainder.setMonth(month);
+                remainder.setDay(day);
+                remainderList.add(remainder);
+            }
+        }
+//
+        return fromArray(remainderList);
     }
 
     private class RemainderDbContract implements BaseColumns{

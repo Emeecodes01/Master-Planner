@@ -57,6 +57,7 @@
             android:layout_below="@+id/reminder_title"
             android:layout_marginLeft="11dp"
             android:layout_marginStart="11dp"
-            android:text="04:50am" />
+            android:text="04:50am"/>
+
     </RelativeLayout>
 </android.support.v7.widget.CardView>

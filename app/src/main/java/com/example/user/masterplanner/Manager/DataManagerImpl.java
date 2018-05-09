@@ -33,7 +33,7 @@ public class DataManagerImpl implements DataManager{
 
     @Override
     public Observable<List<Remainder>> fetchRemindersFromDb(){
-        return null;
+        return masterPlannerDb.getAllRemaindersInDb();
     }
 
     @Override

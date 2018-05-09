@@ -1,6 +1,10 @@
 package com.example.user.masterplanner.Remainder;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.example.user.masterplanner.Models.Remainder;
+import com.example.user.masterplanner.Utils.RxUtils;
 
 import java.util.List;
 
@@ -39,6 +43,7 @@ public class PresenterImpl implements Presenter{
     }
 
     private void onRemindersFetchSuccess(List<Remainder> remainderList){
+        Log.i("success", "Successful " + remainderList.size());
         if (checkView()){
             view.displayReminders(remainderList);
         }
@@ -46,11 +51,15 @@ public class PresenterImpl implements Presenter{
     }
 
     private void onRemainderFetchCompleted(){
-
+        Log.i("completed", "Complete");
     }
 
     private void onRemainderFetchFailed(Throwable throwable) {
+        Log.i("failed", throwable.getMessage() + "This failed");
+    }
 
+    public void destory(){
+        RxUtils.unSubscribe(disposableReminder);
     }
 
     private boolean checkView(){

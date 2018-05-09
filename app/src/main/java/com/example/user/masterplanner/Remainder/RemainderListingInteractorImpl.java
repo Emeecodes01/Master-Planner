@@ -23,6 +23,6 @@ public class RemainderListingInteractorImpl implements RemainderListingInteracto
 
     @Override
     public Observable<List<Remainder>> fetchReminders(){
-        return null;
+        return dataManagerImpl.fetchRemindersFromDb();
     }
 }

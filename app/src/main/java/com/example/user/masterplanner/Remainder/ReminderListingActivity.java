@@ -1,6 +1,7 @@
 package com.example.user.masterplanner.Remainder;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.user.masterplanner.R;
+import com.example.user.masterplanner.Remainder.AddReminder.AddRemainderActivity;
 
 import java.util.Calendar;
 
@@ -24,17 +26,10 @@ import butterknife.ButterKnife;
 public class ReminderListingActivity extends AppCompatActivity implements ReminderListingFragment.OnRemainderFragmentAttach{
 
 
-    @BindView(R.id.nav_drawer)
-    private NavigationView navigationView;
-    @BindView(R.id.drawer_layout)
-    private DrawerLayout drawer_layout;
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reminder);
-        ButterKnife.bind(this);
+        setContentView(R.layout.activity_reminder_content);
     }
 
     @Override
@@ -55,7 +50,7 @@ public class ReminderListingActivity extends AppCompatActivity implements Remind
 
     @Override
     public void onAddReminderClicked() {
-
+        startActivity(new Intent(this, AddRemainderActivity.class));
     }
 
 }

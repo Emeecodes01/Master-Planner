@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface RemainderListingView {
     void displayReminders(List<Remainder> remainderList);
+    void displayLoadingView();
 }
