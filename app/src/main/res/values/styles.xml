@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionModeStyle">@style/contextMenuStyle</item>
     </style>
 
     <!--This is the dark theme-->
@@ -12,5 +13,11 @@
         <item name="colorPrimary">@color/colorPrimary2</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark2</item>
         <item name="colorAccent">@color/colorAccent2</item>
+        <item name="actionModeStyle">@style/contextMenuStyle</item>
+    </style>
+
+    <style name="contextMenuStyle" parent="Widget.AppCompat.ActionMode">
+        <item name="background">@color/context_mode_color</item>
+        <item name="android:title">Select</item>
     </style>
 </resources>

@@ -109,8 +109,28 @@ public class AddRemainderActivity extends AppCompatActivity implements
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
         this.hours = hourOfDay;this.munites = minute;this.secs = second;
         String timeString = hourOfDay + ":" + minute;
+//        String timeStr = getTimeStr(hourOfDay, minute;
         presenter.setNewTimeTv(timeString);
     }
+
+//    private String getTimeStr(int hourOfDay, int minute){
+//        String mHour = "", mMinutes = "";String
+//
+//        if (hourOfDay > 12){
+//            amOrPm = "PM";
+//            hour = hour - 12;
+//        }
+//
+//        if (hour < 10){
+//            mHour = "0"+hour;
+//            if (mins < 10){
+//                mMinutes = "0"+mins;
+//            }else {
+//                mMinutes = ""+mins;
+//            }
+//        }
+//        String time = mHour+ ":" +mMinutes + amOrPm;
+//    }
 
     @Override
     public void onPriorityChecked(String priority) {

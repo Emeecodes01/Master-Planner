@@ -1,9 +1,12 @@
 package com.example.user.masterplanner.Remainder;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,6 +24,8 @@ import java.util.List;
 public class RemainderAdapter extends RecyclerView.Adapter<RemainderAdapter.RemainderViewHolder>{
     private List<Remainder> remainderList;
     private Context context;
+    private RemainderViewHolder viewHolder;
+    private int position;
 
     public RemainderAdapter(Context context, List<Remainder> remainderList){
         this.remainderList = remainderList;
@@ -34,9 +39,65 @@ public class RemainderAdapter extends RecyclerView.Adapter<RemainderAdapter.Rema
         return new RemainderViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(RemainderViewHolder holder, int position){
         holder.onBindViews(position);
+        this.viewHolder = holder;
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view){
+                setPosition(holder.getAdapterPosition());
+                ((AppCompatActivity)context).startSupportActionMode(actionModeCallBacks);
+                return false;
+            }
+        });
+    }
+
+    ActionMode.Callback actionModeCallBacks = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu){
+            ((AppCompatActivity)context).getMenuInflater().inflate(R.menu.contextual_menu, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.share:
+                    Toast.makeText(context, "share", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.delete:
+                    Toast.makeText(context, "delete", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.edit:
+                    Toast.makeText(context, "edit", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+            return true;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+
+        }
+    };
+
+    public RemainderViewHolder getViewHolder(){
+        return viewHolder;
+    }
+
+    public void setPosition(int pos){
+        this.position = pos;
+    }
+
+    public int getPosition(){
+        return position;
     }
 
     @Override
@@ -54,6 +115,7 @@ public class RemainderAdapter extends RecyclerView.Adapter<RemainderAdapter.Rema
             priorityTv = itemView.findViewById(R.id.priority_tv);
             remainderTitle = itemView.findViewById(R.id.reminder_title);
             remainderTime = itemView.findViewById(R.id.reminder_time);
+
         }
 
         public void onBindViews(int position){
@@ -66,13 +128,30 @@ public class RemainderAdapter extends RecyclerView.Adapter<RemainderAdapter.Rema
         }
 
         private void setRemainderTime(int position){
-            int hour = remainderList.get(position).getHour();int mins = remainderList.get(position).getMinutes();
-            String time = hour + ":" + mins;
+            String amOrPm = "AM";
+            int hour = remainderList.get(position).getHour();
+            int mins = remainderList.get(position).getMinutes();
+            String mHour = "", mMinutes = "";
+
+            if (hour > 12){
+                amOrPm = "PM";
+                hour = hour - 12;
+            }
+
+            if (hour < 10){
+                mHour = "0"+hour;
+                if (mins < 10){
+                    mMinutes = "0"+mins;
+                }else {
+                    mMinutes = ""+mins;
+                }
+            }
+            String time = mHour+ ":" +mMinutes + amOrPm;
             remainderTime.setText(time);
         }
 
         private void setUpTitle(String title){
-            String firstLetter = String.valueOf(getFirstLetter(title));
+            String firstLetter = String.valueOf(getFirstLetter(title)).toUpperCase();
             priorityTv.setText(firstLetter);
             remainderTitle.setText(title);
         }

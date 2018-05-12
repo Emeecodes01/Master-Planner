@@ -10,7 +10,8 @@
     <color name="colorPrimary2">#5d7978</color>
     <color name="colorPrimaryDark2">#506867</color>
     <color name="colorAccent2">#9dfce7</color>
-    <color name="Green">#1bca23</color>
-    <color name="Yellow">#d7c60c</color>
-    <color name="Red">#cf0707</color>
+    <color name="Green">#7a1bca23</color>
+    <color name="Yellow">#7ad7c60c</color>
+    <color name="Red">#7acf0707</color>
+    <color name="context_mode_color">#739694</color>
 </resources>

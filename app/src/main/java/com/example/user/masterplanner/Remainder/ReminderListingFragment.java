@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -31,7 +33,9 @@ import butterknife.Unbinder;
  * Created by emmanuel on 2018-04-20.
  */
 
-public class ReminderListingFragment extends Fragment implements RemainderListingView, View.OnClickListener{
+
+public class ReminderListingFragment extends Fragment implements RemainderListingView,
+        View.OnClickListener{
     private OnRemainderFragmentAttach fragmentAttach;
 
     @Inject
@@ -94,7 +98,6 @@ public class ReminderListingFragment extends Fragment implements RemainderListin
 
     @Override
     public void displayReminders(List<Remainder> remainderList){
-        Log.i("called1", "Called1");
         if (remainderList != null){
             if (!remainderList.isEmpty()){
                 this.remainderList.clear();
@@ -153,7 +156,7 @@ public class ReminderListingFragment extends Fragment implements RemainderListin
     public void onDestroy() {
         super.onDestroy();
         ((BaseApplication)getActivity().getApplication())
-                .realeaseAddRemainderComponent();
+                .realeaseListingRemainderComponent();
     }
 
     interface OnRemainderFragmentAttach{

@@ -9,6 +9,7 @@
     android:id="@+id/drawer_layout"
     tools:context="com.example.user.masterplanner.Remainder.ReminderListingActivity">
 
+
     <include layout="@layout/activity_reminder_content"/>
 
 </android.support.v4.widget.DrawerLayout>
